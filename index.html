@@ -2,18 +2,36 @@
 <html>
 <body>
 <script>
+var currentDateGeral = currentDate();
+//var currentDateGeral = retornaData("05/04/2021");
+var posicao;
+var datas = arraySprints();
+var qtdDias;
+var totalHoras;
+
 function currentDate(){
 	var today = new Date();
 	var dd = String(today.getDate()).padStart(2, '0');
-	var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+	var mm = String(today.getMonth()).padStart(2, '0'); //January is 0!
 	var yyyy = today.getFullYear();
-	today = dd + '/' + mm + '/' + yyyy;
-	return today;
+	var newDate = new Date(yyyy,mm,dd,0,0,1,0);
+	//today = dd + '/' + mm + '/' + yyyy;
+	//document.write("currentDateFucniton: " + newDate.getTime() + "<br />");
+	return newDate;
 }
 
+function retornaData(dataCompleta) {
+	var dd = dataCompleta.substring(0,2).padStart(2, '0');
+	var mm = dataCompleta.substring(3,5).padStart(2, '0');
+	var yyyy = dataCompleta.substring(6,10);
+	var dataFormatada = new Date(yyyy, mm-1, dd,0,0,1,0);
+	
+	//document.write("retornaDataFunction: " + dataFormatada.getTime() + "<br />");
+	return dataFormatada;
+}
 
 function myFunction() {
-    document.getElementById("demo").innerHTML = currentDate();
+    document.getElementById("horas").innerHTML = "&emsp;&emsp;&emsp;&emsp;&emsp;" + retornaTotalHoras();
 }
 
 function arraySprints() {
@@ -38,26 +56,103 @@ function arraySprints() {
 					["30/11/2021","13/12/2021","8.5"],
 					["14/11/2021","27/12/2021","8.5"]
 					];
+	return sprints;
 }
 
-/*
-04.01
-	09/03/2021
-	22/03/2021
-04.15
-	23/03/2021
-	05/04/2021
-	
+function encontraPosicaoArray() {
+	for(let lin=0 ; lin<19 ; lin++){
+		if (currentDateGeral.getTime() >= retornaData(datas[lin][0]).getTime() && currentDateGeral.getTime() <= retornaData(datas[lin][1]).getTime() ){
+			posicao = lin;
+			//document.write("lin: "+lin + " data: " + retornaData(datas[lin][0]).getTime() + "<br />");
+			//document.write("lin: "+lin + " current: " + currentDate().getTime() + "<br />");
+			//document.write("posição é: " + posicao + "<br />");
+		}
+	}
+}
 
-8 dias uteis
-7 h dia
-*/
+
+function datediff(first, second) {
+    // Take the difference between the dates and divide by milliseconds per day.
+    // Round to nearest whole number to deal with DST.
+    return Math.round((second-first)/(1000*60*60*24));
+}
+
+function quantidadeDias() {
+	qtdDias = datediff(retornaData(datas[posicao][0]), currentDateGeral);
+	switch (qtdDias) {
+		case 0:
+			qtdDias = qtdDias + 1;
+			break;
+		case 1:
+			qtdDias = qtdDias + 1;
+			break;
+		case 2:
+			qtdDias = qtdDias + 1;
+			break;
+		case 3:
+			qtdDias = qtdDias + 1;
+			break;
+		case 4:
+			qtdDias = qtdDias;
+			break;
+		case 5:
+			qtdDias = qtdDias - 1;
+			break;
+		case 6:
+			qtdDias = qtdDias - 1;
+			break;
+		case 7:
+			qtdDias = qtdDias - 1;
+			break;
+		case 8:
+			qtdDias = qtdDias - 1;
+			break;
+		case 9:
+			qtdDias = qtdDias - 1;
+			break;
+		case 10:
+			qtdDias = qtdDias - 1;
+			break;
+		case 11:
+			qtdDias = qtdDias - 2;
+			break;
+		case 12:
+			qtdDias = qtdDias - 3;
+			break;			
+		case 13:
+			qtdDias = qtdDias - 3;
+			break;			
+		default:
+		console.log("Desculpe, erro ao tentar achar o valor de {qtdDias}");
+	}
+}
+
+function retornaTotalHoras(){
+	totalHoras = 7 * qtdDias;
+	return totalHoras;
+}
+
+function escreveValores(){
+	document.write("Posição é: " + posicao + "<br />");
+	document.write("CurrentDate é: " + currentDateGeral.getTime() + "<br />");
+	document.write("QtdDias é: " + qtdDias + "<br />");
+	document.write("TotalHoras é: " + retornaTotalHoras() + "<br />");
+}
+
 
 </script>
-<H2 id="demo">VALOR</H2>
+
+<h2 style="color:blue;">QTD DE HORAS ESPERADAS</h2>
+<H2 style="color:red" id="horas">VALOR</H2>
 
 <script>
+  encontraPosicaoArray();
+  quantidadeDias();
+  //escreveValores();
+  //retornaData("24/03/2021");
+  
   myFunction();
+  
 </script>
 
 </body>
