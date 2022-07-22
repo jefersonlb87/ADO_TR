@@ -3,7 +3,7 @@
 <body>
 <script>
 var currentDateGeral = currentDate();
-//var currentDateGeral = retornaData("05/04/2021");
+//var currentDateGeral = retornaData("26/07/2022");
 var posicao;
 var datas = arraySprints();
 var qtdDias;
@@ -72,49 +72,49 @@ function datediff(first, second) {
 }
 
 function quantidadeDias() {
-	qtdDias = datediff(retornaData(datas[posicao][0]), currentDateGeral);
-	switch (qtdDias) {
+	dias = datediff(retornaData(datas[posicao][0]), currentDateGeral);
+	switch (dias) {
 		case 0:
-			qtdDias = qtdDias + 1;
+			qtdDias = dias + 1;
 			break;
 		case 1:
-			qtdDias = qtdDias + 1;
+			qtdDias = dias + 1;
 			break;
 		case 2:
-			qtdDias = qtdDias + 1;
+			qtdDias = dias + 1;
 			break;
 		case 3:
-			qtdDias = qtdDias + 1;
+			qtdDias = dias + 1;
 			break;
 		case 4:
-			qtdDias = qtdDias;
+			qtdDias = dias;
 			break;
 		case 5:
-			qtdDias = qtdDias - 1;
+			qtdDias = dias - 1;
 			break;
 		case 6:
-			qtdDias = qtdDias - 1;
+			qtdDias = dias - 1;
 			break;
 		case 7:
-			qtdDias = qtdDias - 1;
+			qtdDias = dias - 1;
 			break;
 		case 8:
-			qtdDias = qtdDias - 1;
+			qtdDias = dias - 1;
 			break;
 		case 9:
-			qtdDias = qtdDias - 1;
+			qtdDias = dias - 2;
 			break;
 		case 10:
-			qtdDias = qtdDias - 1;
+			qtdDias = dias - 3;
 			break;
 		case 11:
-			qtdDias = qtdDias - 2;
+			qtdDias = dias - 4;
 			break;
 		case 12:
-			qtdDias = qtdDias - 3;
+			qtdDias = dias - 5;
 			break;			
 		case 13:
-			qtdDias = qtdDias - 3;
+			qtdDias = dias - 6;
 			break;			
 		default:
 		console.log("Desculpe, erro ao tentar achar o valor de {qtdDias}");
@@ -128,7 +128,9 @@ function retornaTotalHoras(){
 
 function escreveValores(){
 	document.write("Posição é: " + posicao + "<br />");
-	document.write("CurrentDate é: " + currentDateGeral.getTime() + "<br />");
+	document.write("CurrentDate é: " + currentDateGeral + "<br />");
+	document.write("Data Sprint é: " + retornaData(datas[posicao][0]) + "<br />");
+	document.write("Dias é: " + dias + "<br />");
 	document.write("QtdDias é: " + qtdDias + "<br />");
 	document.write("TotalHoras é: " + retornaTotalHoras() + "<br />");
 }
@@ -142,7 +144,7 @@ function escreveValores(){
 <script>
   encontraPosicaoArray();
   quantidadeDias();
-  //escreveValores();
+  escreveValores();
   //retornaData("24/03/2021");
   
   myFunction();
